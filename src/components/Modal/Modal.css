@@ -1,0 +1,46 @@
+/* Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Ensure it appears on top */
+  padding: 20px; /* Add padding to ensure spacing on smaller screens */
+
+}
+
+.modal-content {
+  border-radius: 12px; /* Increased border-radius for a softer look */
+  padding: 30px; /* Increased padding for a bigger modal */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Enhanced shadow for depth */
+  overflow: hidden;
+  max-width: 600px; /* Set a max width for the modal */
+  width: 100%; /* Full width on small screens */
+  display: flex; /* Enable flexbox */
+  flex-direction: column; /* Stack items vertically */
+  
+}
+
+.modal-close {
+  background: none;
+  color: white;
+  border: none;
+  font-size: 20px; /* Increased close button size */
+  position: absolute;
+  top: 15px; /* Adjusted position for better alignment */
+  right: 15px;
+  cursor: pointer;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .modal-content {
+      padding: 20px; /* Less padding on smaller screens */
+      width: 90%; /* Full width on small screens */
+  }
+}
