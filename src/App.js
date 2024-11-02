@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAds } from './features/adsSlice';
 import AdsList from './components/AdsList/AdsList';
-import AddAdForm from './components/AddAdForm/AddAdForm';
 
 function App() {
   const dispatch = useDispatch();
