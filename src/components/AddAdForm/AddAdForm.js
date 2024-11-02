@@ -11,6 +11,7 @@ const AddAdForm = ({ onClose }) => {
   const [toTime, setToTime] = useState('');
   const [error, setError] = useState('');
 
+  // Validate media URL format
   const validateUrl = (url) => {
     try {
       new URL(url);
@@ -20,6 +21,7 @@ const AddAdForm = ({ onClose }) => {
     }
   };
 
+  // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!validateUrl(mediaUrl)) {
@@ -40,16 +42,15 @@ const AddAdForm = ({ onClose }) => {
       to_time: toTime,
     };
 
-    dispatch(addAd(newAd));
-    onClose();
-   
+    dispatch(addAd(newAd)); // Dispatch action to add the ad
+    onClose(); // Close the form after submission
   };
 
   return (
     <form className="add-ad-form" onSubmit={handleSubmit}>
       <h2>Create New Ad</h2>
       {error && <p className="error-message">{error}</p>}
-
+      {/* Form fields for media type, URL, start time, and end time */}
       <label>
         Media Type:
         <select value={mediaType} onChange={(e) => setMediaType(e.target.value)} required>

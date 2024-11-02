@@ -1,24 +1,25 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { updateAd } from '../../features/adsSlice';
-import './EditAdForm.css';
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { updateAd } from "../../features/adsSlice";
+import "./EditAdForm.css";
 
 const EditAdForm = ({ ad, onClose }) => {
-  const initialMediaType = ad.video ? 'video' : 'image';
-  const initialMediaUrl = ad.video || ad.image || '';
+  const initialMediaType = ad.video ? "video" : "image";
+  const initialMediaUrl = ad.video || ad.image || "";
 
   const [formData, setFormData] = useState({
+
     ...ad,
     mediaType: initialMediaType,
     mediaUrl: initialMediaUrl,
     from_time: new Date(ad.from_time).toISOString().slice(0, -1),
     to_time: new Date(ad.to_time).toISOString().slice(0, -1),
   });
-  const [error, setError] = useState('');
-  
+  const [error, setError] = useState("");
 
   const dispatch = useDispatch();
 
+      // Validate media URL format
   const validateUrl = (url) => {
     try {
       new URL(url);
@@ -33,11 +34,12 @@ const EditAdForm = ({ ad, onClose }) => {
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
-      ...(name === 'mediaType' ? { mediaUrl: '' } : {}),
+      ...(name === "mediaType" ? { mediaUrl: "" } : {}),
     }));
-    setError(''); // Clear error on input change
+    setError("");
   };
 
+    // Handle form submission for editing ad
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -49,23 +51,23 @@ const EditAdForm = ({ ad, onClose }) => {
       setError("End time must be after start time");
       return;
     }
-    setError('');
+    setError("");
 
     const updatedAd = {
       ...formData,
-      video: formData.mediaType === 'video' ? formData.mediaUrl : '',
-      image: formData.mediaType === 'image' ? formData.mediaUrl : '',
+      video: formData.mediaType === "video" ? formData.mediaUrl : "",
+      image: formData.mediaType === "image" ? formData.mediaUrl : "",
     };
 
-    dispatch(updateAd(updatedAd));
-    onClose();
+    dispatch(updateAd(updatedAd)); // Dispatch action to update the ad
+    onClose();  // Close the form after submission
   };
 
   return (
     <form onSubmit={handleSubmit} className="edit-ad-form">
       <h3 className="form-title">Edit Ad</h3>
       {error && <p className="error-message">{error}</p>}
-
+      {/* Form fields for media type, URL, start time, and end time */}
 
       <label className="form-label">
         Media Type:
@@ -113,7 +115,9 @@ const EditAdForm = ({ ad, onClose }) => {
           className="form-input"
         />
       </label>
-      <button type="submit" className="form-button save-button">Save</button>
+      <button type="submit" className="form-button save-button">
+        Save
+      </button>
     </form>
   );
 };
